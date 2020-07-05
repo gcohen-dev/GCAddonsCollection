@@ -19,7 +19,7 @@ public protocol GCFileCaching {
     /// - Parameters:
     ///   - cacheFolder: The subfolder in `rootfolder`
     ///   - directory: The directory for our cacheFolder
-    init(_ cacheFolder:String, in directory:SFGBaseFileCache.Directory)
+    init(_ cacheFolder:String, in directory:GCFileCache.Directory)
     
     
     /// Represent the cacheFolder URL
@@ -98,7 +98,7 @@ public protocol GCFileCaching {
 }
 
 /// Extension for SFGBaseFileCaching to provide a default implemation
-public extension SFGBaseFileCaching {
+public extension GCFileCaching {
     func save(data:Data, filename:String) {
         self.save(data: data, filename: filename, isAsynchronous: true, completion: nil)
     }
@@ -137,13 +137,13 @@ open class GCFileCache: GCFileCaching {
     let directory:Directory
     
     public var subRootCacheFolder: URL {
-        return FileManager.default.urls(for: directory.path(), in: .userDomainMask).first!.appendingPathComponent(SFGBaseFileCache.rootFolder).appendingPathComponent(cacheFolder)
+        return FileManager.default.urls(for: directory.path(), in: .userDomainMask).first!.appendingPathComponent(GCFileCache.rootFolder).appendingPathComponent(cacheFolder)
     }
     
     public required init(_ cacheFolder:String, in directory:Directory) {
         self.cacheFolder = cacheFolder
         self.directory = directory
-        super.init()
+//        super.init()
         createDirectory()
     }
     
