@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(iOS 13.0, *)
 protocol GCViewModelProtocol: ObservableObject where ObjectWillChangePublisher.Output == Void {
     associatedtype State
     associatedtype Input
